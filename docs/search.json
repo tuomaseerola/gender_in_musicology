@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Gender in musicology",
     "section": "",
-    "text": "What is the gender distribution of publishing authors is musicology? Has there been a change over the years in authorship positions (first, coauthor, last) and how is this discipline compared to for instance to psychology?\nThe public-facing version of the repository is available at https://tuomaseerola.github.io/gender_in_musicology/\n\n\nData comes from this Scopus with the specific syntax: SRCTITLE ( JOURNAL NAME ) AND PUBYEAR &gt; 1999. I focussed on 15 journals, established through a selection of journal rankings from Scimago.\n\n\n\nThe study report is available at manuscript/manuscript.qmd document."
+    "text": "What is the gender distribution of publishing authors is musicology? Has there been a change over the years in authorship positions (first, coauthor, last) and how is this discipline compared to for instance to psychology?\nThe public-facing version of the repository is available at https://tuomaseerola.github.io/gender_in_musicology/\n\n\nData comes from this Scopus with the specific syntax: SRCTITLE ( JOURNAL NAME ) AND PUBYEAR &gt; 1999. I focussed on 15 journals, established through a selection of journal rankings from Scimago.\n\n\n\nanalysis.qmd summarises the data and the main patterns.\n\n\n\nThe study report is available at manuscript/manuscript.qmd document."
   },
   {
     "objectID": "index.html#data",
@@ -23,9 +23,9 @@
   {
     "objectID": "index.html#analysis",
     "href": "index.html#analysis",
-    "title": "Gender in music psychology",
+    "title": "Gender in musicology",
     "section": "",
-    "text": "Data analysis steps are covered in the analysis.qmd document."
+    "text": "analysis.qmd summarises the data and the main patterns."
   },
   {
     "objectID": "index.html#manuscript",

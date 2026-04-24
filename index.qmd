@@ -10,6 +10,9 @@ The public-facing version of the repository is available at
 
 Data comes from this Scopus with the specific syntax: `SRCTITLE ( JOURNAL NAME ) AND PUBYEAR > 1999`. I focussed on 15 journals, established through a selection of journal rankings from Scimago.
 
+## Analysis
+
+[analysis.qmd](analysis.qmd) summarises the data and the main patterns.
 
 ## Manuscript
 
