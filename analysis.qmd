@@ -1,0 +1,197 @@
+# Analysis of gender distribution of authors of journals articles in musicology
+
+T. Eerola, 29/9/2025, update 30/1/2026 after Dana's manual edits.
+
+This is the first pass to analyse gender distribution of the authors in musicology journals since 2000. The dataset contains 15 journals in musicology that were selected from various [Scimago](https://www.scimagojr.com/journalrank.php?area=1200&category=1210#google_vignette) list minus music psychology journals. The journal selection can be altered, but currently these journals are included (primary sub-discipline in brackets):
+
+- Journal of the American Musicological Society (Musicology)
+- Music and Letters (Musicology)                            
+- Journal of Musicology (Musicology)                        
+- Nineteenth-Century Music Review (Musicology)              
+- Nineteenth Century Music (Musicology)                     
+- Music Theory Spectrum  (Music Analysis)                        
+- Ethnomusicology (Ethnomusicology)                              
+- Ethnomusicology Forum (Ethnomusicology)                        
+- Music Analysis (Music Analysis)                               
+- Popular Music and Society (Popular Music)                   
+- Popular Music (Popular Music)                                
+- Journal of Popular Music Studies (Popular Music)             
+- Journal of World Popular Music (Popular Music)               
+- Journal of Popular Music Education (Popular Music)           
+- Popular Music History (Popular Music)
+
+This amounted to 4,089 authors.
+
+At the moment, the data is nearly complete although `{r} round(887/4089*100)`% of the affiliations are missing.
+
+```{r}
+#| id: libraries
+#| warning: false
+#| eval: true
+#| echo: false
+#| message: false
+library(tidyverse)
+library(stringr)
+library(ggplot2)
+library(bib2df)
+library(countrycode)
+library(easystats)
+library(here)
+```
+
+## Load and preprocess data
+
+```{r}
+#| id: preprocess
+#| eval: false
+#| output: asis
+#| warning: false
+ 
+source('scripts/load_scopus_datasets.R') # Creates full_names dataset
+source('scripts/attribute_country.R') # Add country affiliations
+source('scripts/attribute_gender.R') # Adds gender attributions (precalculated with API)
+source('scripts/create_keys.R') # Add keys for authors and study+author
+source('scripts/clean_citations_and_OA.R') # Process citations and OA status
+source('scripts/attribute_gender_diagnostics.R') # Process citations and OA status
+source('scripts/export_gender_data.R')
+```
+
+
+
+```{r}
+#| id: load-data
+#| eval: true
+#| echo: false
+#| output: asis
+#| warning: false
+#| messages: false
+
+df <- read.csv('data/gender_in_musicology_exported.csv', stringsAsFactors = FALSE,header = TRUE)
+df_checked <- read.csv('data/gender_in_musicology_exported - gender_in_musicology_exported_manual_fixes_26_01_2026.csv', stringsAsFactors = FALSE,header = TRUE)
+elim <- setdiff(names(df),names(df_checked)) # eliminate columns that are not in the checked data
+df <- df %>% dplyr::select(-all_of(elim))
+```
+
+### Check manual corrections
+
+```{r}
+#| id: check-data
+#| eval: true
+#| echo: false
+#| output: asis
+#| warning: false
+#| messages: false
+
+cat(paste("Changed first name:",sum(df$first_name != df_checked$first_name,na.rm=T),"\n\n\n"))
+
+cat(paste("Changed last name:",sum(df$last_name != df_checked$last_name,na.rm=T),"\n\n"))
+
+cat(paste("Missing affiliations - original data:", sum(is.na(df$AFFILIATIONS),na.rm=T),"\n\n"))
+cat(paste("Missing affiliations - curated data:",sum(is.na(df_checked$AFFILIATIONS),na.rm=T),"\n\n"))
+
+cat(paste("Changed gender attribution:", sum(df$Gender != df_checked$Gender,na.rm=T),"\n\n"))
+
+# Summarise how many missing affiliations there are by journal
+S <- df_checked %>%
+  group_by(JOURNAL) %>%
+  summarise(
+    N = n(),
+    N_missing = sum(is.na(AFFILIATIONS)),
+    pct_missing = N_missing / N * 100
+  )
+print(knitr::kable(S, digits = 2, caption = 'Missing affiliations by journal'))
+
+# Journal of Musicology, add 6 missing affiliations manually
+# Music Analysis, add 30
+# Music Theory Spectrum , add 69
+# Nineteenth Century Music, add 30
+
+# Use the manually corrected data
+df <- df_checked
+df$Gender[df$Gender==""]<-"transgender"
+df<-dplyr::filter(df,Gender!="transgender") # remove at this stage, make note!
+```
+
+## Summarise
+
+```{r}
+#| id: summarise
+#| eval: true
+#| output: asis
+#| warning: false
+#| messages: false
+#| fig.width: 9
+#| fig.height: 6
+source('scripts/summarise_gender.R') # different summaries
+```
+
+## Quantify roles
+
+Using the odds ratio but note that there are relatively few coauthors in the data.
+
+```{r}
+#| id: quantify
+#| eval: true
+#| warning: false
+#| message: false
+#| output: asis
+source('scripts/quantify_authorship.R') # use Odds
+source('scripts/citations.R')           # Citations and gender
+print(knitr::kable(citestats_all, digits = 2, caption = 'Citations across all authors'))
+print(knitr::kable(stats_all))
+
+source('scripts/open_access.R')         # OA and gender
+print(knitr::kable(author_OA, digits = 2, caption = 'Open access across all authors'))
+```
+
+
+## Quantify citations and gender
+
+Probably not relevant quantity for these disciplines, but just to see if there are differences.
+
+```{r}
+#| id: citations
+#| eval: true
+#| warning: false
+#| output: asis
+#| message: false
+
+source('scripts/citations.R')           # Citations and gender
+print(knitr::kable(citestats_all, digits = 2, caption = 'Citations across all authors'))
+print(knitr::kable(stats_all))
+
+```
+
+## OA and gender?
+
+```{r}
+#| id: OA
+#| eval: true
+#| warning: false
+#| message: false
+#| output: asis
+
+source('scripts/open_access.R')         # OA and gender
+print(knitr::kable(author_OA, digits = 2, caption = 'Open access across all authors'))
+```
+
+## Geographical distributions
+
+Do some basic summaries of geographical distributions. Start with countries with most publications overall.
+
+```{r}
+#| id: geographical
+#| eval: true
+#| output: asis
+
+source('scripts/country_table.R') # OK
+source('scripts/visualise_gender.R') # OK
+
+```
+
+## Keyword analysis
+
+TBD.
+
+
+

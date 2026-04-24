@@ -1,0 +1,15 @@
+{
+  "hash": "e558d00f6bb00028676307c7ef7a3019",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle             : \"Gender Distribution of Authors in Musicology\"\nshorttitle        : \"Gender in Musicology\"\nauthor: \n  - name          : \"Tuomas Eerola\"\n    affiliation   : \"1\"\n    corresponding : yes    # Define only one corresponding author\n    address       : \"Palace Green, Department of Music, Durham University, DH1 3RL Durham, United Kingdom\"\n    email         : \"tuomas.eerola@durham.ac.uk\"\naffiliation:\n  - id            : \"1\"\n    institution   : \"Department of Music, Durham University\"\n\nauthor_note: |\n  Tuomas Eerola is at the Department of Music, Durham University, UK.\n\nabstract: \"This study examines the gender distribution of the authors in musicology. N=XXXX published papers between years 2000 to 2025 from 15 journals were analysed ...\"  \nkeywords          : \"gender, transparency, musicology, open science, meta-research\"\nwordcount         : \"5555\"\nfigsintext        : yes\nfigurelist        : no\ntablelist         : no\nfootnotelist      : no\nlineno            : no\nmask              : no\ncsl: apa7.csl\nclass             : \"man\"\nbibliography: references.bib\nformat:\n  html: default\n---\n\n\n\n# Introduction\n\n\n\n### Funding statement\n\nAuthors received no funding for this research.\n\n### Competing interests statement\n\nThere were no competing interests.\n\n### Open practices statement\n\nStudy data, analysis scripts and supporting information is available at GitHub, <https://tuomaseerola.github.io/gender_in_musicology>.\n\n# References\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

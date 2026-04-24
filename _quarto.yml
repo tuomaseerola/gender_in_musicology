@@ -1,0 +1,20 @@
+project:
+  type: website
+  output-dir: docs
+website:
+  page-footer: 
+    right: 
+      - icon: github
+        href: https://github.com/tuomaseerola/
+  title: "Gender in Music Psychology"
+  navbar:
+    left:
+      - href: index.qmd
+  page-navigation: true
+  back-to-top-navigation: true
+format:
+  html:
+    theme: materia # lumen, pulse, materia, yeti, zephyr
+    css: styles.css
+    toc: false
+    page-layout: full

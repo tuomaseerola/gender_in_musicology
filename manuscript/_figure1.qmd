@@ -1,0 +1,82 @@
+```{r}
+#| label: fig1
+#| fig-width: 9
+#| fig-height: 4
+#| echo: false
+#| warning: false
+#| message: false
+#| fig.cap: > 
+#|   Authorship types across time.
+
+source(here("scripts","load_gender_data.R"))
+library(ggplot2,quietly = TRUE)
+library(RColorBrewer)
+
+# introduce 5 year bins
+df$YEAR_5 <- cut(df$YEAR, breaks=seq(2000, 2025, by=5), labels=c("2000-2004", "2005-2009", "2010-2014", "2015-2019", "2020-2024"), right=FALSE)
+
+# classify order: First author
+df$authortype <- 'Other'
+df$authortype[df$author_order == 1] <- 'First'
+df$authortype[df$author_last == 1] <- 'Other'
+
+output <- NULL
+U<-levels(df$YEAR_5)
+for (k in 1:length(U)){
+  tmp<-dplyr::filter(df,YEAR_5==U[k])
+  t <- table(tmp$authortype,tmp$Gender)
+  output <- rbind(output,effectsize::oddsratio(t))
+}
+
+output$YearRange <- U
+first <- data.frame(output)
+
+# classify order: Coauthor
+df$authortype <- 'Coauthor'
+df$authortype[df$author_order == 1] <- 'Other'
+df$authortype[df$author_last == 1] <- 'Other'
+
+U<-levels(df$YEAR_5)
+output <- NULL
+for (k in 1:length(U)){
+  tmp<-dplyr::filter(df,YEAR_5==U[k])
+  t <- table(tmp$authortype,tmp$Gender)
+  output <- rbind(output,effectsize::oddsratio(t))
+}
+output$YearRange <- U
+coauthor <- data.frame(output)
+
+# classify order: Last
+df$authortype <- 'Other'
+df$authortype[df$author_order == 1] <- 'Other'
+df$authortype[df$author_last == 1] <- 'Last'
+
+U<-levels(df$YEAR_5)
+output <- NULL
+for (k in 1:length(U)){
+  tmp<-dplyr::filter(df,YEAR_5==U[k])
+  t <- table(tmp$authortype,tmp$Gender)
+  output <- rbind(output,effectsize::oddsratio(t))
+}
+output$YearRange <- U
+last <- data.frame(output)
+
+first$Type<-'First'
+coauthor$Type<-'Co'
+last$Type<-'Last'
+
+annual<-rbind(first,coauthor,last)
+annual$Type<-factor(annual$Type,levels=c("First","Co","Last"))
+
+custom_palette <- brewer.pal(n = 4, name = "Set1")
+
+fig1 <- ggplot(annual,aes(x=YearRange,y=Odds_ratio,color=Type))+
+  geom_hline(yintercept=1, linetype="dashed", color = "black") +
+  geom_point(position = position_dodge(width = 0.4))+
+  geom_errorbar(aes(ymin=CI_low,ymax=CI_high),width=0.2,position = position_dodge(width = 0.4))+
+  scale_color_manual(name="Authorship\ntype",values = custom_palette) +
+  xlab('Year range')+
+  ylab('Female Authorship Odds Ratio')+
+  theme_classic(base_size = 15)
+print(fig1)
+```

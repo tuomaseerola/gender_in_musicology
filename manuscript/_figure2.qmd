@@ -1,0 +1,114 @@
+```{r}
+#| label: fig2
+#| fig-width: 9
+#| fig-height: 4
+#| echo: false
+#| warning: false
+#| message: false
+#| fig.cap: > 
+#|   Authorship types across author counts.
+
+source(here("scripts","load_gender_data.R"))
+library(ggplot2,quietly = TRUE)
+library(RColorBrewer)
+
+df$author_arbitrary <- cut(
+  df$author_order,
+  include.lowest = TRUE,
+  breaks = c(0, 1, 2, 3, 4, 5, 6, 7, 8,40),
+  labels = c("1", "2", "3", "4", "5", "6", "7", "8","9+")
+)
+
+df <- dplyr::mutate(dplyr::group_by(df, BIBTEXKEY), author_N = max(author_order))
+#table(df$author_N)
+
+df$author_N_cropped <- cut(
+  df$author_N,
+  include.lowest = TRUE,
+  breaks = c(0, 1, 2, 3, 4, 5, 6, 40),
+  labels = c("1", "2", "3", "4", "5", "6","7+")
+)
+#table(df$author_N_cropped)
+
+
+#### classify order: First author -------
+df$authortype <- 'Other'
+df$authortype[df$author_order == 1] <- 'First'
+df$authortype[df$author_last == 1] <- 'Other'
+#table(df$authortype,df$Gender)
+
+
+output <- NULL
+U<-levels(df$author_N_cropped)
+for (k in 2:length(U)){
+  tmp<-dplyr::filter(df,author_N_cropped==U[k])
+  t <- table(tmp$authortype,tmp$Gender)
+  output <- rbind(output,effectsize::oddsratio(t))
+}
+
+output$author_N_cropped <- U[2:length(U)]
+first <- data.frame(output)
+#first
+
+#### classify order: Coauthor ----------
+df$authortype <- 'Coauthor'
+df$authortype[df$author_order == 1] <- 'Other'
+df$authortype[df$author_last == 1] <- 'Other'
+#table(df$authortype,df$Gender)
+
+output <- NULL
+U<-levels(df$author_N_cropped)
+for (k in 3:length(U)){
+  tmp<-dplyr::filter(df,author_N_cropped==U[k])
+  t <- table(tmp$authortype,tmp$Gender)
+  output <- rbind(output,effectsize::oddsratio(t))
+}
+
+output$author_N_cropped <- U[3:length(U)]
+coauthor <- data.frame(output)
+
+#### classify order: Last ----------
+df$authortype <- 'Other'
+df$authortype[df$author_order == 1] <- 'Other'
+df$authortype[df$author_last == 1] <- 'Last'
+
+output <- NULL
+U<-levels(df$author_N_cropped)
+for (k in 2:length(U)){
+  tmp<-dplyr::filter(df,author_N_cropped==U[k])
+  t <- table(tmp$authortype,tmp$Gender)
+  output <- rbind(output,effectsize::oddsratio(t))
+}
+
+output$author_N_cropped <- U[2:length(U)]
+last <- data.frame(output)
+
+first$Type<-'First'
+coauthor$Type<-'Co'
+last$Type<-'Last'
+
+author_N<-rbind(first,coauthor,last)
+author_N$Type<-factor(author_N$Type,levels=c("First","Co","Last"))
+
+# Can we count this for single-authored papers?
+tmp<-dplyr::filter(df,author_N==1)
+t<-table(tmp$Gender)
+tmp2<-dplyr::filter(df,author_N>1)
+t2<-table(tmp2$Gender)
+T<-data.frame(rbind(single=t,multi=t2))
+single<-data.frame(effectsize::oddsratio(T),author_N_cropped=1,Type="Single")
+author_N <- rbind(single,author_N)
+author_N$Type<-factor(author_N$Type,levels=c("Single","First","Co","Last"))
+
+custom_palette <- brewer.pal(n = 4, name = "Set1")
+custom_palette<-c(custom_palette[4],custom_palette[1:3])
+fig2 <- ggplot(author_N,aes(x=author_N_cropped,y=Odds_ratio,color=Type))+
+  geom_hline(yintercept=1, linetype="dashed", color = "black") +
+  geom_point(position = position_dodge(width = 0.4),shape=15)+
+  geom_errorbar(aes(ymin=CI_low,ymax=CI_high),width=0.2,position = position_dodge(width = 0.4))+
+  scale_color_manual(name="Authorship\ntype",values = custom_palette) +
+  xlab('Author N')+
+  ylab('Female Authorship Odds Ratio')+
+  theme_classic(base_size = 15)
+print(fig2)
+```

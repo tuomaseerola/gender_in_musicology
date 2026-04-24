@@ -1,0 +1,310 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Gender in musicology",
+    "section": "",
+    "text": "What is the gender distribution of publishing authors is musicology? Has there been a change over the years in authorship positions (first, coauthor, last) and how is this discipline compared to for instance to psychology?\nThe public-facing version of the repository is available at https://tuomaseerola.github.io/gender_in_musicology/\n\n\nData comes from this Scopus with the specific syntax: SRCTITLE ( JOURNAL NAME ) AND PUBYEAR &gt; 1999. I focussed on 15 journals, established through a selection of journal rankings from Scimago.\n\n\n\nThe study report is available at manuscript/manuscript.qmd document."
+  },
+  {
+    "objectID": "index.html#data",
+    "href": "index.html#data",
+    "title": "Gender in musicology",
+    "section": "",
+    "text": "Data comes from this Scopus with the specific syntax: SRCTITLE ( JOURNAL NAME ) AND PUBYEAR &gt; 1999. I focussed on 15 journals, established through a selection of journal rankings from Scimago."
+  },
+  {
+    "objectID": "index.html#preprocessing",
+    "href": "index.html#preprocessing",
+    "title": "Gender in music psychology",
+    "section": "",
+    "text": "To attribute the gender for the authors, we used gender API analysis/process.qmd."
+  },
+  {
+    "objectID": "index.html#analysis",
+    "href": "index.html#analysis",
+    "title": "Gender in music psychology",
+    "section": "",
+    "text": "Data analysis steps are covered in the analysis.qmd document."
+  },
+  {
+    "objectID": "index.html#manuscript",
+    "href": "index.html#manuscript",
+    "title": "Gender in musicology",
+    "section": "",
+    "text": "The study report is available at manuscript/manuscript.qmd document."
+  },
+  {
+    "objectID": "manuscript/manuscript.html",
+    "href": "manuscript/manuscript.html",
+    "title": "Gender Distribution of Authors in Musicology",
+    "section": "",
+    "text": "Introduction\n\nFunding statement\nAuthors received no funding for this research.\n\n\nCompeting interests statement\nThere were no competing interests.\n\n\nOpen practices statement\nStudy data, analysis scripts and supporting information is available at GitHub, https://tuomaseerola.github.io/gender_in_musicology.\n\n\n\nReferences\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "manuscript/manuscript.html#materials",
+    "href": "manuscript/manuscript.html#materials",
+    "title": "Gender Distribution of Authors in Music Psychology",
+    "section": "",
+    "text": "Dataset description. All papers between 2010 and 2022 from specialist journals used in (Jakubowski et al., 2025).\nInitial attribution of genders based on first names. Automatic attribution of gender based on first name databases (Gender API) + manual fixes\nQuality control.\nManual corrections."
+  },
+  {
+    "objectID": "manuscript/manuscript.html#materials-and-analyses",
+    "href": "manuscript/manuscript.html#materials-and-analyses",
+    "title": "Gender Distribution of Authors in Music Psychology",
+    "section": "Materials and analyses",
+    "text": "Materials and analyses\nWe retrieved bibliographic information for all articles published between 2000 and June 2025 from five specialist journals, resulting in 3,373 unique articles: Musicae Scientiae (N = 639), Psychology of Music (N = 1,231), Music Perception (N = 675), Journal of New Music Research (N = 563), and Music & Science (N = 265). These journals have also been used in previous meta-science studies to characterise research practices in music psychology (Jakubowski et al., 2025). Author affiliations were extracted automatically and converted into country-level data. However, these were not manually verified for each entry, as affiliations are not always clearly matched to individual authors due to variations in reporting conventions, such as multiple or partial affiliations.\nIn total, the dataset included 9,066 authors, of whom 5,573 were unique. Author affiliations spanned 63 countries. We also extracted citation counts and Open Access status from Scopus. Information on joint first authorship was not available in the data.\nGender attribution was initially based on first names. We recognise that treating gender as a binary category is inherently problematic. Gender is a complex and multidimensional social construct. However, consistent with prior meta-science research on gender and authorship (González-Alvarez & Sos-Peña, 2020; Ni et al., 2021; Rock et al., 2021; Shah et al., 2021; Son & Bell, 2022; Wais, 2006), we adopt a binary classification—male and female—for analytical purposes and assume that first names allow for a reasonable, though imperfect, attribution of gender. We used the genderizeR API (Wais, 2006), which predicts gender from first names and can be supplemented with country information derived from author affiliations to improve accuracy. This method resolved the gender of 89.3% of authors with a probability greater than 0.90. Only 89 names had a low attribution probability (&lt; 0.55). Unattributed cases were then checked manually, resulting in 185 manual corrections. After this process, 32 names remained ambiguous and 27 were unknown—some likely due to data entry errors in Scopus (e.g. only initials or surnames). These 59 cases were excluded from the dataset. It is likely that the due to challenge of attributing gender correctly not all the gender attributions are correct. However, this error has been previously been shown to be non-biased, i.e. showing similar quantify of mistakes in both directions [ref].\nWe defined three types of authorship positions: first authorship, coauthorship, and last authorship. Coauthorship includes all positions other than first and last. These positions carry different academic prestige: first authorship is typically associated with the primary contributor, while last authorship is often held by senior researchers with established reputations (Tscharntke et al., 2007).\nFor the analyses, we analysed gender disparities in authorship by comparing the frequency of these authorship types between male and female authors. Our analysis focused on the female author proportion (FAP) and odds ratios comparing the likelihood of occupying each authorship position by gender.\n\nManual corrections (to be done!)."
+  },
+  {
+    "objectID": "analysis/analysis.html",
+    "href": "analysis/analysis.html",
+    "title": "Gender in Music Psychology",
+    "section": "",
+    "text": "empty at the moment\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "analysis/gender_attribution.html",
+    "href": "analysis/gender_attribution.html",
+    "title": "Gender in Music Psychology",
+    "section": "",
+    "text": "empty at the moment\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "analysis/process.html",
+    "href": "analysis/process.html",
+    "title": "Analyse gender in music psychology",
+    "section": "",
+    "text": "T. Eerola, 19/3/2025\nGender analysis of the WEIRD data (Jakubowski et al., 2025).\n\n\n\n\n\n\nfull_process &lt;- FALSE\nif(full_process==TRUE){\n    d &lt;- read.csv('../data/WEIRD part cleaned Feb24.csv',header = TRUE)\n    source('scripts/preprocess.R')      # Routine to process the WEIRD dataset\n    source('scripts/gender_analysis.R') # creates enriched dataset\n}\n#### Get processed data --------------------\nif(full_process==FALSE){\n    d &lt;- readRDS('../data/enriched_dataset.rds')\n}\n\nD &lt;- dplyr::filter(d,study_id=='study1') # 1360 articles\nprint(paste(\"number of unique studies:\",nrow(D)))\n\n[1] \"number of unique studies: 1360\"\n\n\n\n\n\nThis needs to be done.\n\nThe author first names for all authors (except for the 1st author) are not in the WEIRD data frame, so these needs to be retrieved.\nThen the gender attribution process needs to be done with some manual checking.\nAggregate with the present (first author) data\n\n\n\n\nThis is now only first author data.\nsource('scripts/summarise_gender.R') #\nCheck for errors\n\nTop 5 names.\n\n\nfirstn\nn\n\n\n\n\nlaura\n16\n\n\nandrea\n14\n\n\namanda\n11\n\n\njennifer\n11\n\n\nmaria\n11\n\n\n\n\nBottom 5 names.\n\n\nfirstn\nn\n\n\n\n\nDiana\n1\n\n\nFrancesca\n1\n\n\nabbey\n1\n\n\nadela\n1\n\n\nagnes\n1\n\n\n\n\n\n\n\n\n\n\n\ngender\nN\nPercent\n\n\n\n\nfemale\n735\n54.04\n\n\nmale\n625\n45.96\n\n\nAll\n1360\n100.00\n\n\n\nSummaries\n\n\n\n\n\n\n\n\n\nFirstAuthorCountry_WEOG\ngender\nN\nPercent\n\n\n\n\nNon-WEOG\nfemale\n67\n4.93\n\n\n\nmale\n72\n5.29\n\n\nWEOG\nfemale\n668\n49.12\n\n\n\nmale\n553\n40.66\n\n\n\nAll\n1360\n100.00\n\n\n\n\n\n\nThis is now only first author data.\n\nsource('scripts/visualise_gender.R') # creates a figure\n\nTop countries \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nContinents \n\n\nLinking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE\n\n\n\n\n\n\n\n\n\nAmericas \n\n\n\n\n\n\n\n\n\nAsia \n\n\n\n\n\n\n\n\n\nPsychology \n\n\n\n\n\n\n\n\nsource('scripts/visualise_gender_trends.R') # creates a figure\n\n\n\n\n\n\n\nsource('scripts/visualise_names.R')  # creates a figure\n\nScale for size is already present.\nAdding another scale for size, which will replace the existing scale."
+  },
+  {
+    "objectID": "analysis/process.html#load-and-preprocess-data",
+    "href": "analysis/process.html#load-and-preprocess-data",
+    "title": "Analyse gender in music psychology",
+    "section": "",
+    "text": "full_process &lt;- FALSE\nif(full_process==TRUE){\n    d &lt;- read.csv('../data/WEIRD part cleaned Feb24.csv',header = TRUE)\n    source('scripts/preprocess.R')      # Routine to process the WEIRD dataset\n    source('scripts/gender_analysis.R') # creates enriched dataset\n}\n#### Get processed data --------------------\nif(full_process==FALSE){\n    d &lt;- readRDS('../data/enriched_dataset.rds')\n}\n\nD &lt;- dplyr::filter(d,study_id=='study1') # 1360 articles\nprint(paste(\"number of unique studies:\",nrow(D)))\n\n[1] \"number of unique studies: 1360\""
+  },
+  {
+    "objectID": "analysis/process.html#deal-with-other-authors-non-first-authors",
+    "href": "analysis/process.html#deal-with-other-authors-non-first-authors",
+    "title": "Analyse gender in music psychology",
+    "section": "",
+    "text": "This needs to be done.\n\nThe author first names for all authors (except for the 1st author) are not in the WEIRD data frame, so these needs to be retrieved.\nThen the gender attribution process needs to be done with some manual checking.\nAggregate with the present (first author) data"
+  },
+  {
+    "objectID": "analysis/process.html#summarise",
+    "href": "analysis/process.html#summarise",
+    "title": "Analyse gender in music psychology",
+    "section": "",
+    "text": "This is now only first author data.\nsource('scripts/summarise_gender.R') #\nCheck for errors\n\nTop 5 names.\n\n\nfirstn\nn\n\n\n\n\nlaura\n16\n\n\nandrea\n14\n\n\namanda\n11\n\n\njennifer\n11\n\n\nmaria\n11\n\n\n\n\nBottom 5 names.\n\n\nfirstn\nn\n\n\n\n\nDiana\n1\n\n\nFrancesca\n1\n\n\nabbey\n1\n\n\nadela\n1\n\n\nagnes\n1\n\n\n\n\n\n\n\n\n\n\n\ngender\nN\nPercent\n\n\n\n\nfemale\n735\n54.04\n\n\nmale\n625\n45.96\n\n\nAll\n1360\n100.00\n\n\n\nSummaries\n\n\n\n\n\n\n\n\n\nFirstAuthorCountry_WEOG\ngender\nN\nPercent\n\n\n\n\nNon-WEOG\nfemale\n67\n4.93\n\n\n\nmale\n72\n5.29\n\n\nWEOG\nfemale\n668\n49.12\n\n\n\nmale\n553\n40.66\n\n\n\nAll\n1360\n100.00"
+  },
+  {
+    "objectID": "analysis/process.html#visualise",
+    "href": "analysis/process.html#visualise",
+    "title": "Analyse gender in music psychology",
+    "section": "",
+    "text": "This is now only first author data.\n\nsource('scripts/visualise_gender.R') # creates a figure\n\nTop countries \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nContinents \n\n\nLinking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE\n\n\n\n\n\n\n\n\n\nAmericas \n\n\n\n\n\n\n\n\n\nAsia \n\n\n\n\n\n\n\n\n\nPsychology \n\n\n\n\n\n\n\n\nsource('scripts/visualise_gender_trends.R') # creates a figure\n\n\n\n\n\n\n\nsource('scripts/visualise_names.R')  # creates a figure\n\nScale for size is already present.\nAdding another scale for size, which will replace the existing scale."
+  },
+  {
+    "objectID": "manuscript/manuscript.html#aims",
+    "href": "manuscript/manuscript.html#aims",
+    "title": "Gender Distribution of Authors in Music Psychology",
+    "section": "",
+    "text": "Our aim is to find out what is the gender distribution in the specialist journals of music psychology. What is the proportion of different types of authorships (lead, coauthors, and last authorships) for men and women in the published papers in the last 25 years? Are there specific trends in terms of countries of the affiliations, topics, or time?"
+  },
+  {
+    "objectID": "analysis.html",
+    "href": "analysis.html",
+    "title": "Analysis of gender distribution of authors of journals articles in musicology",
+    "section": "",
+    "text": "T. Eerola, 29/9/2025, update 30/1/2026 after Dana’s manual edits.\nThis is the first pass to analyse gender distribution of the authors in musicology journals since 2000. The dataset contains 15 journals in musicology that were selected from various Scimago list minus music psychology journals. The journal selection can be altered, but currently these journals are included (primary sub-discipline in brackets):\n\nJournal of the American Musicological Society (Musicology)\nMusic and Letters (Musicology)\n\nJournal of Musicology (Musicology)\n\nNineteenth-Century Music Review (Musicology)\n\nNineteenth Century Music (Musicology)\n\nMusic Theory Spectrum (Music Analysis)\n\nEthnomusicology (Ethnomusicology)\n\nEthnomusicology Forum (Ethnomusicology)\n\nMusic Analysis (Music Analysis)\n\nPopular Music and Society (Popular Music)\n\nPopular Music (Popular Music)\n\nJournal of Popular Music Studies (Popular Music)\n\nJournal of World Popular Music (Popular Music)\n\nJournal of Popular Music Education (Popular Music)\n\nPopular Music History (Popular Music)\n\nThis amounted to 4,089 authors.\nAt the moment, the data is nearly complete although 22% of the affiliations are missing.\n\n\nsource('scripts/load_scopus_datasets.R') # Creates full_names dataset\nsource('scripts/attribute_country.R') # Add country affiliations\nsource('scripts/attribute_gender.R') # Adds gender attributions (precalculated with API)\nsource('scripts/create_keys.R') # Add keys for authors and study+author\nsource('scripts/clean_citations_and_OA.R') # Process citations and OA status\nsource('scripts/attribute_gender_diagnostics.R') # Process citations and OA status\nsource('scripts/export_gender_data.R')\n\n\n\nChanged first name: 58\nChanged last name: 2\nMissing affiliations: original data: 1055\nMissing affiliations: curated data: 887\nChanged gender attribution: 7\n\nMissing affiliations by journal\n\n\n\n\n\n\n\n\nJOURNAL\nN\nN_missing\npct_missing\n\n\n\n\nEthnomusicology\n295\n13\n4.41\n\n\nEthnomusicology Forum\n207\n0\n0.00\n\n\nJournal of Musicology\n228\n120\n52.63\n\n\nJournal of Popular Music Education\n202\n1\n0.50\n\n\nJournal of Popular Music Studies\n570\n31\n5.44\n\n\nJournal of World Popular Music\n172\n0\n0.00\n\n\nJournal of the American Musicological Society\n148\n44\n29.73\n\n\nMusic Analysis\n237\n149\n62.87\n\n\nMusic Theory Spectrum\n254\n196\n77.17\n\n\nMusic and Letters\n253\n35\n13.83\n\n\nNineteenth Century Music\n97\n78\n80.41\n\n\nNineteenth-Century Music Review\n210\n21\n10.00\n\n\nPopular Music\n372\n58\n15.59\n\n\nPopular Music History\n71\n1\n1.41\n\n\nPopular Music and Society\n773\n140\n18.11\n\n\n\n\n\n\n\n\n\nsource('scripts/summarise_gender.R') # different summaries\n\n\n\nGender\nN\npct\n\n\n\n\nfemale\n1425\n0.3485812\n\n\nmale\n2663\n0.6514188\n\n\n\n\n\n\nGender\nM_coauthors\nMd_coauthors\nSD_coauthors\n\n\n\n\nfemale\n1.461754\n1\n1.0133122\n\n\nmale\n1.399549\n1\n0.9563893\n\n\n\n\nWarning: Removed 15 rows containing missing values or values outside the scale range\n(`geom_text()`).\n\nWarning: Removed 4 rows containing missing values or values outside the scale range\n(`geom_text()`).\n\nNumber of coauthors:\nmedian: 1\nmean: 1.163\nsd: 0.548\nmax: 8\n[1] “How many authors can be attributed?” [1] 0.7228474\nWarning: Some values were not matched unambiguously: UK, UNITED STATES\n\n\n\nContinent\nn\nfemale\nmale\nfemale_prop\nmale_prop\n\n\n\n\nAfrica\n48\n17\n31\n0.3541667\n0.6458333\n\n\nAmericas\n1450\n564\n886\n0.3889655\n0.6110345\n\n\nAsia\n186\n52\n134\n0.2795699\n0.7204301\n\n\nEurope\n1029\n370\n659\n0.3595724\n0.6404276\n\n\nOceania\n238\n85\n153\n0.3571429\n0.6428571\n\n\nUnknown\n1137\n337\n800\n0.2963940\n0.7036060\n\n\nAll\n4088\n1425\n2663\n0.3485812\n0.6514188\n\n\n\n\n\n\n\nUsing the odds ratio but note that there are relatively few coauthors in the data.\nsource('scripts/quantify_authorship.R') # use Odds\n\n\n\nOdds_ratio\nCI\nCI_low\nCI_high\nname\n\n\n\n\n0.83\n0.95\n0.72\n0.96\nSingle\n\n\n1.26\n0.95\n1.02\n1.56\nFirst\n\n\n1.06\n0.95\n0.77\n1.46\nCoauthor\n\n\n1.12\n0.95\n0.91\n1.39\nLast\n\n\n\n[1] “5-year growth rate of female authorships:”\n\n\n\nType\nAAGR\n\n\n\n\nFirst\n-14.41\n\n\nCoauthor\n-15.45\n\n\nLast\n18.28\n\n\n\nsource('scripts/citations.R')           # Citations and gender\nprint(knitr::kable(citestats_all, digits = 2, caption = 'Citations across all authors'))\n\nCitations across all authors\n\n\nGender\nMd\nM\nQ75\nCI_lower\nCI_upper\n\n\n\n\nfemale\n2\n5.86\n7\n2\n3\n\n\nmale\n3\n6.70\n8\n2\n3\n\n\n\nprint(knitr::kable(stats_all))\n\n\n\nstatistic\np.value\nparameter\nmethod\n\n\n\n\n5.001684\n0.0253227\n1\nKruskal-Wallis rank sum test\n\n\n\nsource('scripts/open_access.R')         # OA and gender\nprint(knitr::kable(author_OA, digits = 2, caption = 'Open access across all authors'))\n\nOpen access across all authors\n\n\nOdds_ratio\nCI\nCI_low\nCI_high\nType\n\n\n\n\n1.14\n0.95\n0.95\n1.37\nFirst\n\n\n1.10\n0.95\n0.54\n2.24\nCo\n\n\n0.95\n0.95\n0.60\n1.51\nLast\n\n\n\n\n\n\nProbably not relevant quantity for these disciplines, but just to see if there are differences.\nsource('scripts/citations.R')           # Citations and gender\nprint(knitr::kable(citestats_all, digits = 2, caption = 'Citations across all authors'))\n\nCitations across all authors\n\n\nGender\nMd\nM\nQ75\nCI_lower\nCI_upper\n\n\n\n\nfemale\n2\n5.86\n7\n2\n3\n\n\nmale\n3\n6.70\n8\n2\n3\n\n\n\nprint(knitr::kable(stats_all))\n\n\n\nstatistic\np.value\nparameter\nmethod\n\n\n\n\n5.001684\n0.0253227\n1\nKruskal-Wallis rank sum test\n\n\n\n\n\n\nsource('scripts/open_access.R')         # OA and gender\nprint(knitr::kable(author_OA, digits = 2, caption = 'Open access across all authors'))\n\nOpen access across all authors\n\n\nOdds_ratio\nCI\nCI_low\nCI_high\nType\n\n\n\n\n1.14\n0.95\n0.95\n1.37\nFirst\n\n\n1.10\n0.95\n0.54\n2.24\nCo\n\n\n0.95\n0.95\n0.60\n1.51\nLast\n\n\n\n\n\n\nDo some basic summaries of geographical distributions. Start with countries with most publications overall.\nsource('scripts/country_table.R') # OK\n\nsource('scripts/visualise_gender.R') # OK\n\n\n\n\nTBD."
+  },
+  {
+    "objectID": "analysis.html#load-and-preprocess-data",
+    "href": "analysis.html#load-and-preprocess-data",
+    "title": "Analysis of gender distribution of authors of journals articles in musicology",
+    "section": "",
+    "text": "source('scripts/load_scopus_datasets.R') # Creates full_names dataset\nsource('scripts/attribute_country.R') # Add country affiliations\nsource('scripts/attribute_gender.R') # Adds gender attributions (precalculated with API)\nsource('scripts/create_keys.R') # Add keys for authors and study+author\nsource('scripts/clean_citations_and_OA.R') # Process citations and OA status\nsource('scripts/attribute_gender_diagnostics.R') # Process citations and OA status\nsource('scripts/export_gender_data.R')\n\n\n\nChanged first name: 58\nChanged last name: 2\nMissing affiliations: original data: 1055\nMissing affiliations: curated data: 887\nChanged gender attribution: 7\n\nMissing affiliations by journal\n\n\n\n\n\n\n\n\nJOURNAL\nN\nN_missing\npct_missing\n\n\n\n\nEthnomusicology\n295\n13\n4.41\n\n\nEthnomusicology Forum\n207\n0\n0.00\n\n\nJournal of Musicology\n228\n120\n52.63\n\n\nJournal of Popular Music Education\n202\n1\n0.50\n\n\nJournal of Popular Music Studies\n570\n31\n5.44\n\n\nJournal of World Popular Music\n172\n0\n0.00\n\n\nJournal of the American Musicological Society\n148\n44\n29.73\n\n\nMusic Analysis\n237\n149\n62.87\n\n\nMusic Theory Spectrum\n254\n196\n77.17\n\n\nMusic and Letters\n253\n35\n13.83\n\n\nNineteenth Century Music\n97\n78\n80.41\n\n\nNineteenth-Century Music Review\n210\n21\n10.00\n\n\nPopular Music\n372\n58\n15.59\n\n\nPopular Music History\n71\n1\n1.41\n\n\nPopular Music and Society\n773\n140\n18.11"
+  },
+  {
+    "objectID": "analysis.html#summarise",
+    "href": "analysis.html#summarise",
+    "title": "Analysis of gender distribution of authors of journals articles in musicology",
+    "section": "",
+    "text": "source('scripts/summarise_gender.R') # different summaries\n\n\n\nGender\nN\npct\n\n\n\n\nfemale\n1425\n0.3485812\n\n\nmale\n2663\n0.6514188\n\n\n\n\n\n\nGender\nM_coauthors\nMd_coauthors\nSD_coauthors\n\n\n\n\nfemale\n1.461754\n1\n1.0133122\n\n\nmale\n1.399549\n1\n0.9563893\n\n\n\n\nWarning: Removed 15 rows containing missing values or values outside the scale range\n(`geom_text()`).\n\nWarning: Removed 4 rows containing missing values or values outside the scale range\n(`geom_text()`).\n\nNumber of coauthors:\nmedian: 1\nmean: 1.163\nsd: 0.548\nmax: 8\n[1] “How many authors can be attributed?” [1] 0.7228474\nWarning: Some values were not matched unambiguously: UK, UNITED STATES\n\n\n\nContinent\nn\nfemale\nmale\nfemale_prop\nmale_prop\n\n\n\n\nAfrica\n48\n17\n31\n0.3541667\n0.6458333\n\n\nAmericas\n1450\n564\n886\n0.3889655\n0.6110345\n\n\nAsia\n186\n52\n134\n0.2795699\n0.7204301\n\n\nEurope\n1029\n370\n659\n0.3595724\n0.6404276\n\n\nOceania\n238\n85\n153\n0.3571429\n0.6428571\n\n\nUnknown\n1137\n337\n800\n0.2963940\n0.7036060\n\n\nAll\n4088\n1425\n2663\n0.3485812\n0.6514188"
+  },
+  {
+    "objectID": "analysis.html#visualise",
+    "href": "analysis.html#visualise",
+    "title": "Analyse gender in music psychology",
+    "section": "",
+    "text": "source('scripts/visualise_gender.R') # OK\n\nTop countries \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsource('scripts/visualise_continent.R') # OK\n\nContinents \n\n\nLinking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE\n\n\n\n\n\n\n\n\n\nAmericas \n\n\n\n\n\n\n\n\n\nAsia \n\n\n\n\n\n\n\n\n\nPsychology \n\n\n\n\n\n\n\n\n#source('scripts/visualise_gender.R') # creates a figure\n#source('scripts/visualise_gender_trends.R') # creates a figure\n#source('scripts/visualise_names.R')  # creates a figure"
+  },
+  {
+    "objectID": "analysis.html#odds-ratio-95-ci",
+    "href": "analysis.html#odds-ratio-95-ci",
+    "title": "Analysis of gender distribution of authors of journals articles in musicology",
+    "section": "",
+    "text": "0.83 | [0.71, 0.96] Odds ratio | 95% CI ————————- 1.27 | [1.03, 1.56]\n\n\n\nOdds_ratio\nCI\nCI_low\nCI_high\nname\n\n\n\n\n0.83\n0.95\n0.71\n0.96\nSingle\n\n\n1.27\n0.95\n1.03\n1.56\nFirst\n\n\n1.06\n0.95\n0.77\n1.46\nCoauthor\n\n\n1.13\n0.95\n0.91\n1.39\nLast\n\n\n\n[1] “5-year growth rate of female authorships:”\n\n\n\nType\nAAGR\n\n\n\n\nFirst\n-14.47\n\n\nCoauthor\n-14.88\n\n\nLast\n18.44\n\n\n\nsource('scripts/citations.R')           # Citations and gender\nprint(knitr::kable(citestats_all, digits = 2, caption = 'Citations across all authors'))\n\nCitations across all authors\n\n\nGender\nMd\nM\nQ75\nCI_lower\nCI_upper\n\n\n\n\nfemale\n2\n5.88\n7\n2\n3\n\n\nmale\n3\n6.69\n8\n2\n3\n\n\n\nprint(knitr::kable(stats_all))\n\n\n\nstatistic\np.value\nparameter\nmethod\n\n\n\n\n4.763433\n0.0290705\n1\nKruskal-Wallis rank sum test\n\n\n\nsource('scripts/open_access.R')         # OA and gender\nprint(knitr::kable(author_OA, digits = 2, caption = 'Open access across all authors'))\n\nOpen access across all authors\n\n\nOdds_ratio\nCI\nCI_low\nCI_high\nType\n\n\n\n\n1.15\n0.95\n0.96\n1.38\nFirst\n\n\n1.10\n0.95\n0.54\n2.24\nCo\n\n\n0.95\n0.95\n0.60\n1.51\nLast"
+  },
+  {
+    "objectID": "analysis.html#odds-ratio-95-ci-1",
+    "href": "analysis.html#odds-ratio-95-ci-1",
+    "title": "Analyse gender in music psychology",
+    "section": "",
+    "text": "0.99 | [0.90, 1.08] Odds ratio | 95% CI ————————- 0.73 | [0.67, 0.81]"
+  },
+  {
+    "objectID": "analysis.html#quantify",
+    "href": "analysis.html#quantify",
+    "title": "Analyse gender in musicology",
+    "section": "Quantify",
+    "text": "Quantify\n\nsource('scripts/quantify_authorship.R') # use Odds\n\nOdds ratio | 95% CI\n0.83 | [0.71, 0.96] Odds ratio | 95% CI ————————- 1.27 | [1.03, 1.56]\n\n\n\nOdds_ratio\nCI\nCI_low\nCI_high\nname\n\n\n\n\n0.83\n0.95\n0.71\n0.96\nSingle\n\n\n1.27\n0.95\n1.03\n1.56\nFirst\n\n\n1.06\n0.95\n0.77\n1.46\nCoauthor\n\n\n1.13\n0.95\n0.91\n1.39\nLast\n\n\n\n[1] “5-year growth rate of female authorships:”\n\n\n\nType\nAAGR\n\n\n\n\nFirst\n-14.47\n\n\nCoauthor\n-14.88\n\n\nLast\n18.44\n\n\n\nsource('scripts/citations.R')           # Citations and gender\nWarning: Unknown or uninitialised column: `CI_lower`.\nWarning: Unknown or uninitialised column: `CI_upper`.\nWarning: Unknown or uninitialised column: `CI_lower`.\nWarning: Unknown or uninitialised column: `CI_upper`.\nWarning: Unknown or uninitialised column: `CI_lower`.\nWarning: Unknown or uninitialised column: `CI_upper`.\nWarning: Unknown or uninitialised column: `CI_lower`.\nWarning: Unknown or uninitialised column: `CI_upper`.\nprint(knitr::kable(citestats_all, digits = 2, caption = 'Citations across all authors'))\n\nCitations across all authors\n\n\nGender\nMd\nM\nQ75\nCI_lower\nCI_upper\n\n\n\n\nfemale\n2\n5.88\n7\n2\n3\n\n\nmale\n3\n6.69\n8\n2\n3\n\n\n\nprint(knitr::kable(stats_all))\n\n\n\nstatistic\np.value\nparameter\nmethod\n\n\n\n\n4.763433\n0.0290705\n1\nKruskal-Wallis rank sum test\n\n\n\nsource('scripts/open_access.R')         # OA and gender\nprint(knitr::kable(author_OA, digits = 2, caption = 'Open access across all authors'))\n\nOpen access across all authors\n\n\nOdds_ratio\nCI\nCI_low\nCI_high\nType\n\n\n\n\n1.15\n0.95\n0.96\n1.38\nFirst\n\n\n1.10\n0.95\n0.54\n2.24\nCo\n\n\n0.95\n0.95\n0.60\n1.51\nLast"
+  },
+  {
+    "objectID": "manuscript/manuscript.html#authorship-positions",
+    "href": "manuscript/manuscript.html#authorship-positions",
+    "title": "Gender Distribution of Authors in Music Psychology",
+    "section": "Authorship positions",
+    "text": "Authorship positions\nThe overall odds ratio for women as first authors was 1.32 [95% CI: 1.21–1.44], indicating that the odds of first authorship are 32% higher for females compared to the male authors. For coauthorship positions, the OR was 0.99 [0.90–1.08], suggesting no substantial gender difference. In contrast, the odds ratio for women as last authors was 0.73 [0.67–0.81], indicating that the odds of last authorship are 27% lower in females. For the first and last authorship position, the odds ratios are significant at p &lt; .001 level.\nTo illustrate the trends across time in the authorship positions across the gender, we looked at 5-year-windows of the authorship types across gender, shown in Figure 1. The higher odds for female authors at first author position seems to be established in 2010 onwards. Female first author position exhibits a positive 5-year growth rate of +11.1%. The coauthor positions for female authors are relative stable at the odds around 1, indicating relatively equal odds between female and male authors. However, the last author positions have become relatively more rare after 2010, showing statistically significantly lower odds ratios from 2010 onwards and negative 5-year growth rate (-9.5%).\n\n\n\n\n\nAuthorship types across time.\n\n\n\n\nThe range of the number of authors in varies considerable. Here we have the maximum of 34 authors in a paper and a median of 2 (M=2.69,SD=1.77). To illustrate how the actual number of authors in a paper impacts female first author likelihood, we calculated the odds ratios across the number of authors in paper, pooling the papers with 7 or more authors together (N=749, 8.3%). We added the single-authored papers to the plot to indicate the odds of being female to be single authors compared to all studies with multiple authors. The results are shown in Figure 2. We can observe that while female authors are not more likely to be single authors than men, they tend to be more likely to be first authors than males in papers with 2 or 3 authors; the odds ratios for first authorship position for female authors for papers with 2 authors is 1.55 [130-1.85], and for 3 authors the odds ratio is 1.61 [1.35-1.92], both significantly different from equal proportion. The last authorship positions for female authors are consequently lower, odds ratio of 0.65 [0.54–0.77] for 2 authors and 0.59 [0.49–0.71] for 3 authors, both also significant at p&lt;.001 level. At four and five authors, the higher odds ratio for female is still evident (OR of 1.37 both both), but the last authorship positions are no longer relative rare for papers with 4 and 5 authors (OR 0.90 and 0.95, respectively). At six authors and above, the odds ratios indicate the same trend (higher ratio for first author, lower for last) although due to lower number of observations, these are no longer significantly different.\n\n\n\n\n\nAuthorship types across author counts."
+  },
+  {
+    "objectID": "manuscript/manuscript.html#female-authorships-citations-and-open-access",
+    "href": "manuscript/manuscript.html#female-authorships-citations-and-open-access",
+    "title": "Gender Distribution of Authors in Music Psychology",
+    "section": "Female authorships, citations and Open Access",
+    "text": "Female authorships, citations and Open Access\n\nCitations:\nOA:"
+  },
+  {
+    "objectID": "manuscript/manuscript.html#geographical-differences",
+    "href": "manuscript/manuscript.html#geographical-differences",
+    "title": "Gender Distribution of Authors in Music Psychology",
+    "section": "Geographical differences",
+    "text": "Geographical differences\nPast studies have identified consistent geographical patterns in female authorship. For example, a large-scale analysis of psychology publications found that 46.5% of authorships were by women, with European countries showing a lower average proportion of 42.8% (González-Alvarez & Sos-Peña, 2020). To examine geographical differences more closely, we calculated the odds of female authorship by country, as shown in Figure 3.\n\n\n\nFemale author odds ratio across more prolific countries publishing music psychology.\n\n\nOPTIONAL\n\nFemale author odds ratios across continents.\n\n\nContinent\nN\nOdds_ratio\nCI_low\nCI_high\n\n\n\n\nEurope\n4985\n0.82\n0.75\n0.89\n\n\nAmericas\n2356\n1.12\n1.02\n1.23\n\n\nAsia\n931\n0.89\n0.78\n1.02\n\n\nOceania\n742\n1.66\n1.43\n1.93\n\n\nAfrica\n52\n0.91\n0.52\n1.59"
+  },
+  {
+    "objectID": "manuscript/manuscript.html#citations-and-open-access",
+    "href": "manuscript/manuscript.html#citations-and-open-access",
+    "title": "Gender Distribution of Authors in Music Psychology",
+    "section": "Citations and Open Access",
+    "text": "Citations and Open Access\nOne potential difference established in previous bibliometric analyses of gendered authorship is citations (Chatterjee & Werner, 2021; West et al., 2013). Here we tested whether the citations – as indexed by Scopus – show differences across gender. The median citation for studies with female lead authors is 10 [9–11], and for males, the numbers are identical (Md=10 [9–11]) and the difference is not statistically significant (\\(\\chi^2\\)(1)=1.68, p=0.195) using rank-based Wilcoxon test. The same comparison of citations for studies with last authors yields similar results 10 [8–11], and for males, the numbers are similar (Md=11 [10–12]). Again, the difference is not statistically significant (\\(\\chi^2\\)(1)=2.13, p=0.145). If we assume that we can weight in the gender contribution of all authors in a publication to its citation count, we observe a minor difference, where median citations for female authors is 9 [9–10], and for males, the central measure are statistically significantly higher (Md=10 [9–10], \\(\\chi^2\\)(1)=14.14, p=0.0002).\nWe also explored whether the open access status of the articles is associated with gender. Out of 3373 articles, 32.2% are Open Access in this sample, as indexed by Scopus. For first-authored articles, female odds ratio for Open Access is 1.51 [1.31–1.75], suggesting over 50% higher odds associated with publishing open access by women as compared to men. If we observe only the last authorship status of the publications, the difference vanishes with the odds ratio indisguishable from even division (1.00 and the confidence interval), OR = 0.85 [0.72–1.01]."
+  },
+  {
+    "objectID": "analysis.html#odds-ratio-95-ci-name",
+    "href": "analysis.html#odds-ratio-95-ci-name",
+    "title": "Analyse gender in music psychology",
+    "section": "",
+    "text": "1.32 | [1.21, 1.44] | First 0.99 | [0.90, 1.08] | Coauthor 0.73 | [0.67, 0.81] | Last [1] “5-year growth rate of female authorships:”\n\n\n\nType\nAAGR\n\n\n\n\nFirst\n11.13\n\n\nCoauthor\n-11.13\n\n\nLast\n-9.50\n\n\n\nsource('scripts/citations.R')           # Citations and gender\nWarning: Unknown or uninitialised column: `CI_lower`.\nWarning: Unknown or uninitialised column: `CI_upper`.\nWarning: Unknown or uninitialised column: `CI_lower`.\nWarning: Unknown or uninitialised column: `CI_upper`.\nWarning: Unknown or uninitialised column: `CI_lower`.\nWarning: Unknown or uninitialised column: `CI_upper`.\nWarning: Unknown or uninitialised column: `CI_lower`.\nWarning: Unknown or uninitialised column: `CI_upper`.\nprint(knitr::kable(citestats_all, digits = 2, caption = 'Citations across all authors'))\n\nCitations across all authors\n\n\nGender\nMd\nM\nQ75\nCI_lower\nCI_upper\n\n\n\n\nfemale\n9\n19.89\n22\n9\n10\n\n\nmale\n10\n22.21\n27\n9\n10\n\n\n\nprint(knitr::kable(stats_all))\n\n\n\nstatistic\np.value\nparameter\nmethod\n\n\n\n\n14.13713\n0.00017\n1\nKruskal-Wallis rank sum test\n\n\n\nsource('scripts/open_access.R')         # OA and gender\nprint(knitr::kable(author_OA, digits = 2, caption = 'Open access across all authors'))\n\nOpen access across all authors\n\n\nOdds_ratio\nCI\nCI_low\nCI_high\nType\n\n\n\n\n1.51\n0.95\n1.31\n1.75\nFirst\n\n\n1.07\n0.95\n0.92\n1.23\nCo\n\n\n0.85\n0.95\n0.72\n1.01\nLast"
+  },
+  {
+    "objectID": "analysis.html#geographical",
+    "href": "analysis.html#geographical",
+    "title": "Analyse gender in musicology",
+    "section": "Geographical",
+    "text": "Geographical\nsource('scripts/country_table.R') # OK\n\nsource('scripts/visualise_gender.R') # OK\n\n#source('scripts/table_continent.R') # IN progress\nTable: Female author odds ratios across continents."
+  },
+  {
+    "objectID": "manuscript/manuscript.html#more",
+    "href": "manuscript/manuscript.html#more",
+    "title": "Gender Distribution of Authors in Music Psychology",
+    "section": "More?",
+    "text": "More?\n\nAssociation with the keywords (Figure?)"
+  },
+  {
+    "objectID": "manuscript/manuscript.html#more-analyses",
+    "href": "manuscript/manuscript.html#more-analyses",
+    "title": "Gender Distribution of Authors in Music Psychology",
+    "section": "More analyses?",
+    "text": "More analyses?\n\nAssociation with the keywords (similar)"
+  },
+  {
+    "objectID": "manuscript/manuscript-apaquarto.html",
+    "href": "manuscript/manuscript-apaquarto.html",
+    "title": "Gender Distribution of Authors in Music Psychology",
+    "section": "",
+    "text": "In recent years, meta-scientific attention has increasingly turned toward music psychology, with a focus on how WEIRD (Jakubowski et al., 2025) and transparent (Eerola, 2024) the discipline is. In this study, we examine gender equality in authorship as an indicator of how equitably gender is represented within the field. Disparities in gender distribution may signal structural barriers and disciplinary cultures that constrain the diversity of contributors and hinder optimal knowledge production (Ni et al., 2021). Authorship visibility is also critical for academic career progression, influencing recognition, funding, and advancement opportunities. Establishing a clear understanding of gender representation in music psychology is therefore essential for supporting a more inclusive and sustainable academic community. Previous studies across various disciplines—including psychology—have consistently revealed persistent gender inequalities in authorship, though the extent of these disparities varies by field (González-Alvarez & Sos-Peña, 2020; Rock et al., 2021; Shah et al., 2021; Son & Bell, 2022).\nEquality – Why Should We Care?\n\nLack of equity impacts:\nproductivity\ninnovation\njob satisfaction\n\nAcademia has acknowledged serious challenges in gender equity\n\nwomen less present in positions of power (e.g. 30% UK profs)\npay gap is wider in academia (16%) than in other sectors (9%)\nwomen represent fewer than 30% authorships globally\n\nWeave these studies into the narrative:\n\nNi et al. (2021) presented an overview of the gendered nature of authorship\nSon & Bell (2022) Scientific authorship by gender and they concluded that…\nShah et al. (2021) showed how far off is the gender parity in scientific authorship using a bibliometric analysis.\nRock et al. (2021) quantified the gender gap in authorship in herpetology, showing that …. (we can omit this)\n\nSee González-Alvarez & Sos-Peña (2020) for a baseline from other disciplines:\n\nHard Sciences (N=119,592) = 0.148\nBio and Social Sciences (N=262,122) = 0.433\nPsychology (N=90,067) = 0.452\n\nWhat is the situation in music psychology?\n\n\nOur aim is to find out what is the gender distribution in the specialist journals of music psychology. What is the proportion of different types of authorships (lead, coauthors, and last authorships) for men and women in the published papers in the last 25 years? Are there specific trends in terms of countries of the affiliations, topics, or time?"
+  },
+  {
+    "objectID": "manuscript/manuscript-apaquarto.html#aims",
+    "href": "manuscript/manuscript-apaquarto.html#aims",
+    "title": "Gender Distribution of Authors in Music Psychology",
+    "section": "",
+    "text": "Our aim is to find out what is the gender distribution in the specialist journals of music psychology. What is the proportion of different types of authorships (lead, coauthors, and last authorships) for men and women in the published papers in the last 25 years? Are there specific trends in terms of countries of the affiliations, topics, or time?"
+  },
+  {
+    "objectID": "manuscript/manuscript-apaquarto.html#materials-and-analyses",
+    "href": "manuscript/manuscript-apaquarto.html#materials-and-analyses",
+    "title": "Gender Distribution of Authors in Music Psychology",
+    "section": "Materials and analyses",
+    "text": "Materials and analyses\nWe retrieved bibliographic information for all articles published between 2000 and June 2025 from five specialist journals, resulting in 3,373 unique articles: Musicae Scientiae (N = 639), Psychology of Music (N = 1,231), Music Perception (N = 675), Journal of New Music Research (N = 563), and Music & Science (N = 265). These journals have also been used in previous meta-science studies to characterise research practices in music psychology (Jakubowski et al., 2025). Author affiliations were extracted automatically and converted into country-level data. However, these were not manually verified for each entry, as affiliations are not always clearly matched to individual authors due to variations in reporting conventions, such as multiple or partial affiliations.\nIn total, the dataset included 9,066 authors, of whom 5,573 were unique. Author affiliations spanned 63 countries. We also extracted citation counts and Open Access status from Scopus. Information on joint first authorship was not available in the data.\nGender attribution was initially based on first names. We recognise that treating gender as a binary category is inherently problematic. Gender is a complex and multidimensional social construct. However, consistent with prior meta-science research on gender and authorship (González-Alvarez & Sos-Peña, 2020; Ni et al., 2021; Rock et al., 2021; Shah et al., 2021; Son & Bell, 2022; Wais, 2006), we adopt a binary classification—male and female—for analytical purposes and assume that first names allow for a reasonable, though imperfect, attribution of gender. We used the genderizeR API (Wais, 2006), which predicts gender from first names and can be supplemented with country information derived from author affiliations to improve accuracy. This method resolved the gender of 89.3% of authors with a probability greater than 0.90. Only 89 names had a low attribution probability (&lt; 0.55). Unattributed cases were then checked manually, resulting in 185 manual corrections. After this process, 32 names remained ambiguous and 27 were unknown—some likely due to data entry errors in Scopus (e.g. only initials or surnames). These 59 cases were excluded from the dataset. It is likely that the due to challenge of attributing gender correctly not all the gender attributions are correct. However, this error has been previously been shown to be non-biased, i.e. showing similar quantify of mistakes in both directions [ref].\nWe defined three types of authorship positions: first authorship, coauthorship, and last authorship. Coauthorship includes all positions other than first and last. These positions carry different academic prestige: first authorship is typically associated with the primary contributor, while last authorship is often held by senior researchers with established reputations (Tscharntke et al., 2007).\nFor the analyses, we analysed gender disparities in authorship by comparing the frequency of these authorship types between male and female authors. Our analysis focused on the female author proportion (FAP) and odds ratios comparing the likelihood of occupying each authorship position by gender.\n\nManual corrections (to be done!)."
+  },
+  {
+    "objectID": "manuscript/manuscript-apaquarto.html#authorship-positions",
+    "href": "manuscript/manuscript-apaquarto.html#authorship-positions",
+    "title": "Gender Distribution of Authors in Music Psychology",
+    "section": "Authorship positions",
+    "text": "Authorship positions\nThe overall odds ratio for women as first authors was 1.32 [95% CI: 1.21–1.44], indicating that the odds of first authorship are 32% higher for females compared to the male authors. For coauthorship positions, the OR was 0.99 [0.90–1.08], suggesting no substantial gender difference. In contrast, the odds ratio for women as last authors was 0.73 [0.67–0.81], indicating that the odds of last authorship are 27% lower in females. For the first and last authorship position, the odds ratios are significant at p &lt; .001 level.\nTo illustrate the trends across time in the authorship positions across the gender, we looked at 5-year-windows of the authorship types across gender, shown in Figure 1. The higher odds for female authors at first author position seems to be established in 2010 onwards. Female first author position exhibits a positive 5-year growth rate of +11.1%. The coauthor positions for female authors are relative stable at the odds around 1, indicating relatively equal odds between female and male authors. However, the last author positions have become relatively more rare after 2010, showing statistically significantly lower odds ratios from 2010 onwards and negative 5-year growth rate (-9.5%).\n\n\n\n\n\nAuthorship types across time.\n\n\n\n\nThe range of the number of authors in varies considerable. Here we have the maximum of 34 authors in a paper and a median of 2 (M=2.69,SD=1.77). To illustrate how the actual number of authors in a paper impacts female first author likelihood, we calculated the odds ratios across the number of authors in paper, pooling the papers with 7 or more authors together (N=749, 8.3%). We added the single-authored papers to the plot to indicate the odds of being female to be single authors compared to all studies with multiple authors. The results are shown in Figure 2. We can observe that while female authors are not more likely to be single authors than men, they tend to be more likely to be first authors than males in papers with 2 or 3 authors; the odds ratios for first authorship position for female authors for papers with 2 authors is 1.55 [130-1.85], and for 3 authors the odds ratio is 1.61 [1.35-1.92], both significantly different from equal proportion. The last authorship positions for female authors are consequently lower, odds ratio of 0.65 [0.54–0.77] for 2 authors and 0.59 [0.49–0.71] for 3 authors, both also significant at p&lt;.001 level. At four and five authors, the higher odds ratio for female is still evident (OR of 1.37 both both), but the last authorship positions are no longer relative rare for papers with 4 and 5 authors (OR 0.90 and 0.95, respectively). At six authors and above, the odds ratios indicate the same trend (higher ratio for first author, lower for last) although due to lower number of observations, these are no longer significantly different.\n\n\n\n\n\nAuthorship types across author counts."
+  },
+  {
+    "objectID": "manuscript/manuscript-apaquarto.html#citations-and-open-access",
+    "href": "manuscript/manuscript-apaquarto.html#citations-and-open-access",
+    "title": "Gender Distribution of Authors in Music Psychology",
+    "section": "Citations and Open Access",
+    "text": "Citations and Open Access\nOne potential difference established in previous bibliometric analyses of gendered authorship is citations (Chatterjee & Werner, 2021; West et al., 2013). Here we tested whether the citations – as indexed by Scopus – show differences across gender. The median citation for studies with female lead authors is 10 [9–11], and for males, the numbers are identical (Md=10 [9–11]) and the difference is not statistically significant (\\(\\chi^2\\)(1)=1.68, p=0.195) using rank-based Wilcoxon test. The same comparison of citations for studies with last authors yields similar results 10 [8–11], and for males, the numbers are similar (Md=11 [10–12]). Again, the difference is not statistically significant (\\(\\chi^2\\)(1)=2.13, p=0.145). If we assume that we can weight in the gender contribution of all authors in a publication to its citation count, we observe a minor difference, where median citations for female authors is 9 [9–10], and for males, the central measure are statistically significantly higher (Md=10 [9–10], \\(\\chi^2\\)(1)=14.14, p=0.0002).\nWe also explored whether the open access status of the articles is associated with gender. Out of 3373 articles, 32.2% are Open Access in this sample, as indexed by Scopus. For first-authored articles, female odds ratio for Open Access is 1.51 [1.31–1.75], suggesting over 50% higher odds associated with publishing open access by women as compared to men. If we observe only the last authorship status of the publications, the difference vanishes with the odds ratio indisguishable from even division (1.00 and the confidence interval), OR = 0.85 [0.72–1.01]."
+  },
+  {
+    "objectID": "manuscript/manuscript-apaquarto.html#geographical-differences",
+    "href": "manuscript/manuscript-apaquarto.html#geographical-differences",
+    "title": "Gender Distribution of Authors in Music Psychology",
+    "section": "Geographical differences",
+    "text": "Geographical differences\nPast studies have identified consistent geographical patterns in female authorship. For example, a large-scale analysis of psychology publications found that 46.5% of authorships were by women, with European countries showing a lower average proportion of 42.8% (González-Alvarez & Sos-Peña, 2020). To examine geographical differences more closely, we calculated the odds of female authorship by country, as shown in Figure 3.\n\n\n\nFemale author odds ratio across more prolific countries publishing music psychology.\n\n\nOPTIONAL\n\nFemale author odds ratios across continents.\n\n\nContinent\nN\nOdds_ratio\nCI_low\nCI_high\n\n\n\n\nEurope\n4985\n0.82\n0.75\n0.89\n\n\nAmericas\n2356\n1.12\n1.02\n1.23\n\n\nAsia\n931\n0.89\n0.78\n1.02\n\n\nOceania\n742\n1.66\n1.43\n1.93\n\n\nAfrica\n52\n0.91\n0.52\n1.59"
+  },
+  {
+    "objectID": "manuscript/manuscript-apaquarto.html#more-analyses",
+    "href": "manuscript/manuscript-apaquarto.html#more-analyses",
+    "title": "Gender Distribution of Authors in Music Psychology",
+    "section": "More analyses?",
+    "text": "More analyses?\n\nAssociation with the keywords (similar)"
+  },
+  {
+    "objectID": "analysis.html#quantify-roles",
+    "href": "analysis.html#quantify-roles",
+    "title": "Analysis of gender distribution of authors of journals articles in musicology",
+    "section": "",
+    "text": "Using the odds ratio but note that there are relatively few coauthors in the data.\nsource('scripts/quantify_authorship.R') # use Odds\n\n\n\nOdds_ratio\nCI\nCI_low\nCI_high\nname\n\n\n\n\n0.83\n0.95\n0.72\n0.96\nSingle\n\n\n1.26\n0.95\n1.02\n1.56\nFirst\n\n\n1.06\n0.95\n0.77\n1.46\nCoauthor\n\n\n1.12\n0.95\n0.91\n1.39\nLast\n\n\n\n[1] “5-year growth rate of female authorships:”\n\n\n\nType\nAAGR\n\n\n\n\nFirst\n-14.41\n\n\nCoauthor\n-15.45\n\n\nLast\n18.28\n\n\n\nsource('scripts/citations.R')           # Citations and gender\nprint(knitr::kable(citestats_all, digits = 2, caption = 'Citations across all authors'))\n\nCitations across all authors\n\n\nGender\nMd\nM\nQ75\nCI_lower\nCI_upper\n\n\n\n\nfemale\n2\n5.86\n7\n2\n3\n\n\nmale\n3\n6.70\n8\n2\n3\n\n\n\nprint(knitr::kable(stats_all))\n\n\n\nstatistic\np.value\nparameter\nmethod\n\n\n\n\n5.001684\n0.0253227\n1\nKruskal-Wallis rank sum test\n\n\n\nsource('scripts/open_access.R')         # OA and gender\nprint(knitr::kable(author_OA, digits = 2, caption = 'Open access across all authors'))\n\nOpen access across all authors\n\n\nOdds_ratio\nCI\nCI_low\nCI_high\nType\n\n\n\n\n1.14\n0.95\n0.95\n1.37\nFirst\n\n\n1.10\n0.95\n0.54\n2.24\nCo\n\n\n0.95\n0.95\n0.60\n1.51\nLast"
+  },
+  {
+    "objectID": "analysis.html#geographical-distributions",
+    "href": "analysis.html#geographical-distributions",
+    "title": "Analysis of gender distribution of authors of journals articles in musicology",
+    "section": "",
+    "text": "Do some basic summaries of geographical distributions. Start with countries with most publications overall.\nsource('scripts/country_table.R') # OK\n\nsource('scripts/visualise_gender.R') # OK"
+  },
+  {
+    "objectID": "analysis.html#keyword-analysis",
+    "href": "analysis.html#keyword-analysis",
+    "title": "Analysis of gender distribution of authors of journals articles in musicology",
+    "section": "",
+    "text": "TBD."
+  },
+  {
+    "objectID": "analysis.html#summarise-the-data",
+    "href": "analysis.html#summarise-the-data",
+    "title": "Analysis of gender distribution of authors of journals articles in musicology",
+    "section": "",
+    "text": "print(\"Changed first name:\")\n[1] “Changed first name:”\nsum(df$first_name != df_checked$first_name,na.rm=T)\n[1] 58\nprint(\"Changed last name:\")\n[1] “Changed last name:”\nsum(df$last_name != df_checked$last_name,na.rm=T)\n[1] 2\nprint(\"Missing affiliations: original data\")\n[1] “Missing affiliations: original data”\nsum(is.na(df$AFFILIATIONS),na.rm=T)\n[1] 1055\nprint(\"Missing affiliations: curated data\")\n[1] “Missing affiliations: curated data”\nsum(is.na(df_checked$AFFILIATIONS),na.rm=T)\n[1] 887\nprint(\"Changed gender attribution:\")\n[1] “Changed gender attribution:”\nsum(df$Gender != df_checked$Gender,na.rm=T)\n[1] 7\n# Summarise how many missing affiliations there are by journal\nS &lt;- df_checked %&gt;%\n  group_by(JOURNAL) %&gt;%\n  summarise(\n    N = n(),\n    N_missing = sum(is.na(AFFILIATIONS)),\n    pct_missing = N_missing / N * 100\n  )\nprint(knitr::kable(S, digits = 2, caption = 'Missing affiliations by journal'))\n\nMissing affiliations by journal\n\n\n\n\n\n\n\n\nJOURNAL\nN\nN_missing\npct_missing\n\n\n\n\nEthnomusicology\n295\n13\n4.41\n\n\nEthnomusicology Forum\n207\n0\n0.00\n\n\nJournal of Musicology\n228\n120\n52.63\n\n\nJournal of Popular Music Education\n202\n1\n0.50\n\n\nJournal of Popular Music Studies\n570\n31\n5.44\n\n\nJournal of World Popular Music\n172\n0\n0.00\n\n\nJournal of the American Musicological Society\n148\n44\n29.73\n\n\nMusic Analysis\n237\n149\n62.87\n\n\nMusic Theory Spectrum\n254\n196\n77.17\n\n\nMusic and Letters\n253\n35\n13.83\n\n\nNineteenth Century Music\n97\n78\n80.41\n\n\nNineteenth-Century Music Review\n210\n21\n10.00\n\n\nPopular Music\n372\n58\n15.59\n\n\nPopular Music History\n71\n1\n1.41\n\n\nPopular Music and Society\n773\n140\n18.11\n\n\n\n# Journal of Musicology, add 6 missing affiliations manually\n# Music Analysis, add 30\n# Music Theory Spectrum , add 69\n# Nineteenth Century Music, add 30\n\n# Use the manually corrected data\ndf &lt;- df_checked\ndf$Gender[df$Gender==\"\"]&lt;-\"transgender\"\ndf&lt;-dplyr::filter(df,Gender!=\"transgender\") # remove at this stage, make note!\n\n\nsource('scripts/summarise_gender.R') # different summaries\n\n\n\nGender\nN\npct\n\n\n\n\nfemale\n1425\n0.3485812\n\n\nmale\n2663\n0.6514188\n\n\n\n\n\n\nGender\nM_coauthors\nMd_coauthors\nSD_coauthors\n\n\n\n\nfemale\n1.461754\n1\n1.0133122\n\n\nmale\n1.399549\n1\n0.9563893\n\n\n\n\nWarning: Removed 15 rows containing missing values or values outside the scale range\n(`geom_text()`).\n\nWarning: Removed 4 rows containing missing values or values outside the scale range\n(`geom_text()`).\n\nNumber of coauthors:\nmedian: 1\nmean: 1.163\nsd: 0.548\nmax: 8\n[1] “How many authors can be attributed?” [1] 0.7228474\nWarning: Some values were not matched unambiguously: UK, UNITED STATES\n\n\n\nContinent\nn\nfemale\nmale\nfemale_prop\nmale_prop\n\n\n\n\nAfrica\n48\n17\n31\n0.3541667\n0.6458333\n\n\nAmericas\n1450\n564\n886\n0.3889655\n0.6110345\n\n\nAsia\n186\n52\n134\n0.2795699\n0.7204301\n\n\nEurope\n1029\n370\n659\n0.3595724\n0.6404276\n\n\nOceania\n238\n85\n153\n0.3571429\n0.6428571\n\n\nUnknown\n1137\n337\n800\n0.2963940\n0.7036060\n\n\nAll\n4088\n1425\n2663\n0.3485812\n0.6514188"
+  },
+  {
+    "objectID": "analysis.html#quantify-citations-and-gender",
+    "href": "analysis.html#quantify-citations-and-gender",
+    "title": "Analysis of gender distribution of authors of journals articles in musicology",
+    "section": "",
+    "text": "Probably not relevant quantity for these disciplines, but just to see if there are differences.\nsource('scripts/citations.R')           # Citations and gender\nprint(knitr::kable(citestats_all, digits = 2, caption = 'Citations across all authors'))\n\nCitations across all authors\n\n\nGender\nMd\nM\nQ75\nCI_lower\nCI_upper\n\n\n\n\nfemale\n2\n5.86\n7\n2\n3\n\n\nmale\n3\n6.70\n8\n2\n3\n\n\n\nprint(knitr::kable(stats_all))\n\n\n\nstatistic\np.value\nparameter\nmethod\n\n\n\n\n5.001684\n0.0253227\n1\nKruskal-Wallis rank sum test"
+  },
+  {
+    "objectID": "analysis.html#oa-and-gender",
+    "href": "analysis.html#oa-and-gender",
+    "title": "Analysis of gender distribution of authors of journals articles in musicology",
+    "section": "",
+    "text": "source('scripts/open_access.R')         # OA and gender\nprint(knitr::kable(author_OA, digits = 2, caption = 'Open access across all authors'))\n\nOpen access across all authors\n\n\nOdds_ratio\nCI\nCI_low\nCI_high\nType\n\n\n\n\n1.14\n0.95\n0.95\n1.37\nFirst\n\n\n1.10\n0.95\n0.54\n2.24\nCo\n\n\n0.95\n0.95\n0.60\n1.51\nLast"
+  }
+]
